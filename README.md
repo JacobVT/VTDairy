@@ -1,24 +1,7 @@
-# README
+# VTDairy
+VTDairy is an application that serves a website which anybody can visit. The main goal of this app is to provide an uplifting and inspiring view into the organic farming industry. It also serves as a platform to showcase the dairy and provide useful information for users.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+--- 
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Features
+- Introduction 

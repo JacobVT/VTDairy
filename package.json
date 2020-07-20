@@ -1,15 +1,31 @@
 {
-  "name": "VTDairy",
+  "name": "vtdairy",
   "private": true,
-  "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.2.2",
-    "turbolinks": "^5.2.0"
+  "description": "VTDairy is a web application for managing dairy info.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JacobVT/VTDairy.git"
   },
-  "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.0"
+  "author": "Jacob van Tol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JacobVT/VTDairy/issues"
+  },
+  "homepage": "https://github.com/JacobVT/VTDairy#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
+    "sqlite3": "^5.0.0",
+    "umzug": "^2.3.0"
   }
 }
