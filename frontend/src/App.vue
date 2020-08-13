@@ -61,26 +61,40 @@
         </v-row>
 
         <!-- Transition -->
-        <v-row style="height: 90vh" align="start" justify="center">
-          <v-expand-x-transition>
-            <v-divider v-if="scrolled" class="divider"></v-divider>
-          </v-expand-x-transition>
-          <span
-            v-if="scrolled"
-            class="fade-in"
-          >
-            Who are we?
-          </span>
-        </v-row>
+        <div style="height: 40vh">
+          <v-row justify="center">
+            <v-expand-x-transition>
+              <v-divider v-if="scrolledOnce" class="divider"></v-divider>
+            </v-expand-x-transition>
+          </v-row>
+          <v-row justify="start" class="mt-5 mb-5">
+            <h5
+              v-if="scrolledOnce"
+              class="fade-in f-dancing h5-size"
+            >
+              Who are we?
+            </h5>
+          </v-row>
+           <v-row justify="center" class="mt-5 ml-5">
+            <h1
+              v-if="scrolledOnce"
+              class="fade-in f-roboto-slab h1-size text-xs-left paragraph"
+            >
+              Glad you asked!
+              On this site, you can learn the answer to this question and much more. We are dedicated to sharing knowledge and enjoyment with everyone who visits. <br/><br/>
+              <strong> To continue, just click one of the options below! </strong>
+            </h1>
+          </v-row>
+        </div>
         
         <!-- Slide -->
         <v-row id="slides"
         justify="center" align="center"
         v-observe-visibility="visibilityChanged">
-          <v-fade-transition>
             <v-slide-group
               v-if="cardVisible"
               v-model="currentSlide"
+              class="fade-in"
             >
              <v-slide-item
                 v-for="(slide, i) in slides"
@@ -107,7 +121,6 @@
                 </v-card>
               </v-slide-item>
             </v-slide-group>
-          </v-fade-transition>
         </v-row>
       </v-container>
     <v-fab-transition>
@@ -153,6 +166,7 @@ export default {
   data: () => ({
     loaded: false,
     scrolled: false,
+    scrolledOnce: false,
     cardVisible: false,
     currentSlide: null,
     slides: [
@@ -163,12 +177,12 @@ export default {
       },
       {
         title: "Explore Recipes",
-        text: "Learn about...",
+        text: "Coming Soon",
         image: "swing.jpg",
       },
       {
         title: "Play Games",
-        text: "Learn about...",
+        text: "Coming Soon",
         image: "jump.jpg",
       },
     ],
@@ -182,6 +196,7 @@ export default {
   methods: {
     handleScroll() {
       this.scrolled = window.scrollY != 0;
+      this.scrolledOnce = true;
     },
     visibilityChanged(isVisible) {
       this.cardVisible = isVisible;
@@ -194,6 +209,7 @@ export default {
 };
 </script>
 <style scoped>
+/* Main */
 #dairy {
   background: rgb(255, 254, 241)
 }
@@ -203,16 +219,28 @@ html {
 .divider {
   border-width: 2px;
 }
+.card-title-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.paragraph {
+  max-width: 900px;
+}
+
+/* Text */
 .f-dancing {
   font-family: 'Dancing Script', cursive;
-  /* font-size: 5rem; */
 }
 .f-martel {
   font-family: 'Martel', serif;
-  /* font-size: 6rem; */
+}
+.f-roboto-slab {
+  font-family: 'Roboto Slab', serif;
 }
 .stroke {
   -webkit-text-stroke: 2px white;
+}
+.h1-size {
+  font-size: 1.5rem;
 }
 .h5-size {
   font-size: 5rem;
@@ -220,15 +248,14 @@ html {
 .h6-size {
   font-size: 8rem;
 }
-.card-title-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-}
+
+/* Fade Animation */
 .fade-in {
-animation: fadeIn ease 5s;
--webkit-animation: fadeIn ease 5s;
--moz-animation: fadeIn ease 5s;
--o-animation: fadeIn ease 5s;
--ms-animation: fadeIn ease 5s;
+animation: fadeIn ease 2s;
+-webkit-animation: fadeIn ease 2s;
+-moz-animation: fadeIn ease 2s;
+-o-animation: fadeIn ease 2s;
+-ms-animation: fadeIn ease 2s;
 }
 @keyframes fadeIn {
 0% {opacity:0;}
