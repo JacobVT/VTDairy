@@ -53,7 +53,7 @@
     <v-main>
       <v-container>
         <!-- Title -->
-        <v-row justify="center" align="end" class="pb-5" style="height: 55vh">
+        <v-row justify="center" align="center" class="pb-5" style="height: 85vh">
           <v-col class="text-center" cols="12">
             <h5 class="f-dancing h5-size" > Welcome to the</h5>
             <h6 class="f-martel h6-size stroke" style=" color: skyblue"> Van Tol Dairy </h6>
@@ -61,16 +61,16 @@
         </v-row>
 
         <!-- Transition -->
-        <div style="height: 40vh">
-          <v-row justify="center">
+        <div style="height: 35vh">
+          <v-row justify="center" align="end">
             <v-expand-x-transition>
               <v-divider v-if="scrolledOnce" class="divider"></v-divider>
             </v-expand-x-transition>
           </v-row>
-          <v-row justify="start" class="mt-5 mb-5">
+          <v-row justify="center" class="mt-5 mb-5">
             <h5
               v-if="scrolledOnce"
-              class="fade-in f-dancing h5-size"
+              class="fade-in f-dancing h4-size"
             >
               Who are we?
             </h5>
@@ -78,7 +78,7 @@
            <v-row justify="center" class="mt-5 ml-5">
             <h1
               v-if="scrolledOnce"
-              class="fade-in f-roboto-slab h1-size text-xs-left paragraph"
+              class="slow-fade-in f-roboto-slab h1-size text-xs-left paragraph"
             >
               Glad you asked!
               On this site, you can learn the answer to this question and much more. We are dedicated to sharing knowledge and enjoyment with everyone who visits. <br/><br/>
@@ -88,8 +88,8 @@
         </div>
         
         <!-- Slide -->
-        <v-row id="slides"
-        justify="center" align="center"
+        <v-row
+        justify="center" align="start"
         v-observe-visibility="visibilityChanged">
             <v-slide-group
               v-if="cardVisible"
@@ -107,6 +107,7 @@
                   width="300"
                   @mouseenter="toggle"
                   @mouseleave="toggle"
+
                 >
                   <v-img
                     class="white--text align-start"
@@ -115,7 +116,7 @@
                   >
                     <v-card-title class="card-title-overlay f-martel">{{slide.title}}</v-card-title>
                     <v-expand-transition>
-                      <v-card-text v-if="active"  class="card-title-overlay" style="height: 380px">{{slide.text}}</v-card-text>
+                      <v-card-text v-if="active"  class="card-title-overlay" style="height: 400px">{{slide.text}}</v-card-text>
                     </v-expand-transition>
                   </v-img>
                 </v-card>
@@ -134,7 +135,7 @@
         dark
         bottom
         right
-        href="#slides"
+        readonly
       >
         <v-icon>mdi-chevron-double-down</v-icon>
       </v-btn>
@@ -172,7 +173,7 @@ export default {
     slides: [
       {
         title: "Read Our Story",
-        text: "Learn about...",
+        text: "Discover the origins of the Van Tol Dairy. Learn about who we are and why we love what we do.",
         image: "owners.jpg",
       },
       {
@@ -223,7 +224,7 @@ html {
   background-color: rgba(0, 0, 0, 0.5);
 }
 .paragraph {
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 /* Text */
@@ -242,6 +243,9 @@ html {
 .h1-size {
   font-size: 1.5rem;
 }
+.h4-size {
+  font-size: 4rem;
+}
 .h5-size {
   font-size: 5rem;
 }
@@ -256,6 +260,13 @@ animation: fadeIn ease 2s;
 -moz-animation: fadeIn ease 2s;
 -o-animation: fadeIn ease 2s;
 -ms-animation: fadeIn ease 2s;
+}
+.slow-fade-in {
+animation: fadeIn ease 5s;
+-webkit-animation: fadeIn ease 5s;
+-moz-animation: fadeIn ease 5s;
+-o-animation: fadeIn ease 5s;
+-ms-animation: fadeIn ease 5s;
 }
 @keyframes fadeIn {
 0% {opacity:0;}
