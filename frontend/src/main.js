@@ -1,11 +1,13 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import VueApollo from "vue-apollo";
-import Vuetify from "vuetify";
-import apolloClient from "./vue-apollo";
-import App from "./App.vue";
-import vuetify from './plugins/vuetify';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import VueApollo from 'vue-apollo';
+import Vuetify from 'vuetify';
 import VueObserveVisibility from 'vue-observe-visibility'
+
+import App from './App.vue';
+import router from './plugins/router';
+import apolloClient from './vue-apollo';
+import vuetify from './plugins/vuetify';
 
 
 Vue.config.productionTip = false;
@@ -19,27 +21,9 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 });
 
-const router = new VueRouter({
-  mode: "history",
-  routes: [
-    // {
-    //   path: "/",
-    //   components: require("./containers/Articles.vue")
-    // },
-    // {
-    //   path: "/article/:id",
-    //   components: require("./containers/Article.vue")
-    // },
-    // {
-    //   path: "/category/:id",
-    //   components: require("./containers/Category.vue")
-    // }
-  ]
-});
-
 new Vue({
-  apolloProvider,
   router,
+  apolloProvider,
   vuetify,
   render: h => h(App)
 }).$mount("#app");

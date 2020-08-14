@@ -1,295 +1,87 @@
 <template>
-  <v-app v-on:scroll="handleScroll" id="dairy">
+  <v-app id="dairy">
     <v-app-bar
       app
       color="primary"
       elevate-on-scroll
     >
-      <!-- Show home icon and label when user is NOT on main landing page -->
-       <!-- <v-btn icon dark>
+      <v-btn icon class="btn-fix" dark to="/" active-class>
         <v-icon>mdi-home</v-icon>
-      </v-btn> -->
+      </v-btn>
       <v-toolbar-title class="f-martel white--text">Van Tol Dairy</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="white"
-            text
-            v-bind="attrs"
-            v-on="on"
-          >Recipes</v-btn>
-        </template>
-        <span>Still in development!</span>
-      </v-tooltip>
-
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="white"
-            text
-            v-bind="attrs"
-            v-on="on"
-          >Games</v-btn>
-        </template>
-        <span>Still in development!</span>
-      </v-tooltip>
-
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            color="white"
-            text
-            v-bind="attrs"
-            v-on="on"
-          >Contact us</v-btn>
-        </template>
-        <span>Still in development!</span>
-      </v-tooltip>
+      <div 
+        v-for="item in appBarLinks" 
+        :key="item.title" 
+      >
+        <v-tooltip 
+          bottom
+          v-if="item.inDev"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn 
+              color="white"
+              text
+              v-bind="attrs"
+              v-on="on"
+              :to="item.link"
+            > {{item.title}}
+            </v-btn>
+          </template>
+          <span>Still in development!</span>
+        </v-tooltip>
+        <v-btn 
+          color="white"
+          text
+          v-else
+          :to="item.link"
+        > {{item.title}}
+        </v-btn>
+      </div>
     </v-app-bar>
 
     <v-main>
-      <v-container>
-        <!-- Title -->
-        <v-row justify="center" align="center" class="pb-5" style="height: 85vh">
-          <v-col class="text-center" cols="12">
-            <h5 class="f-dancing h5-size" > Welcome to the</h5>
-            <h6 class="f-martel h6-size stroke" style=" color: skyblue"> Van Tol Dairy </h6>
-          </v-col>
-        </v-row>
-
-        <!-- Transition -->
-        <div style="height: 35vh">
-          <v-row justify="center" align="end">
-            <v-expand-x-transition>
-              <v-divider v-if="scrolledOnce" class="divider"></v-divider>
-            </v-expand-x-transition>
-          </v-row>
-          <v-row justify="center" class="mt-5 mb-5">
-            <h5
-              v-if="scrolledOnce"
-              class="fade-in f-dancing h4-size"
-            >
-              Who are we?
-            </h5>
-          </v-row>
-           <v-row justify="center" class="mt-5 ml-5">
-            <h1
-              v-if="scrolledOnce"
-              class="slow-fade-in f-roboto-slab h1-size text-xs-left paragraph"
-            >
-              Glad you asked!
-              On this site, you can learn the answer to this question and much more. We are dedicated to sharing knowledge and enjoyment with everyone who visits. <br/><br/>
-              <strong> To continue, just click one of the options below! </strong>
-            </h1>
-          </v-row>
-        </div>
-        
-        <!-- Slide -->
-        <v-row
-        justify="center" align="start"
-        v-observe-visibility="visibilityChanged">
-            <v-slide-group
-              v-if="cardVisible"
-              v-model="currentSlide"
-              class="fade-in"
-            >
-             <v-slide-item
-                v-for="(slide, i) in slides"
-                :key="i"
-                v-slot:default="{ active, toggle }"
-              >
-                <v-card
-                  class="ma-5"
-                  height="400"
-                  width="300"
-                  @mouseenter="toggle"
-                  @mouseleave="toggle"
-
-                >
-                  <v-img
-                    class="white--text align-start"
-                    height="400px"
-                    :src="require('./assets/' + slide.image)"
-                  >
-                    <v-card-title class="card-title-overlay f-martel">{{slide.title}}</v-card-title>
-                    <v-expand-transition>
-                      <v-card-text v-if="active"  class="card-title-overlay" style="height: 400px">{{slide.text}}</v-card-text>
-                    </v-expand-transition>
-                  </v-img>
-                </v-card>
-              </v-slide-item>
-            </v-slide-group>
-        </v-row>
-      </v-container>
-    <v-fab-transition>
-      <v-btn
-        v-if="!scrolled"
-        fab
-        class="thing"
-        color="rgba(0, 0, 0, 0.5)"
-        fixed
-        large
-        dark
-        bottom
-        right
-        readonly
-      >
-        <v-icon>mdi-chevron-double-down</v-icon>
-      </v-btn>
-    </v-fab-transition>
-
-      <!-- <div class="hideme text--black">Fade In</div>
-      <div style="height: 500px"/> -->
-      
-      <!-- fade in text + carousel -->
-      <!-- add clickable cow, add any logic and screen effects to the landing page -->
-    
+      <router-view />
     </v-main>
   </v-app>
 </template>
 
 <script>
-//import Recipes from "./components/Recipes.vue";
 
 export default {
   name: 'App',
 
-  components: {
-    //Recipes
-  },
-
-  computed: {
-  },
-
   data: () => ({
-    loaded: false,
-    scrolled: false,
-    scrolledOnce: false,
-    cardVisible: false,
-    currentSlide: null,
-    slides: [
+    appBarLinks: [
       {
-        title: "Read Our Story",
-        text: "Discover the origins of the Van Tol Dairy. Learn about who we are and why we love what we do.",
-        image: "owners.jpg",
+        title: 'Story',
+        link: '/story',
+        inDev: false,
       },
       {
-        title: "Explore Recipes",
-        text: "Coming Soon",
-        image: "swing.jpg",
+        title: 'Recipes',
+        link: '/',
+        inDev: true,
       },
       {
-        title: "Play Games",
-        text: "Coming Soon",
-        image: "jump.jpg",
+        title: 'Games',
+        link: '/',
+        inDev: true,
       },
     ],
-
   }),
-
-  created () {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-
-  methods: {
-    handleScroll() {
-      this.scrolled = window.scrollY != 0;
-      this.scrolledOnce = true;
-    },
-    visibilityChanged(isVisible) {
-      this.cardVisible = isVisible;
-    }
-  },
-
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
 };
 </script>
 <style scoped>
-/* Main */
 #dairy {
   background: rgb(255, 254, 241)
 }
 html {
   scroll-behavior: smooth;
 }
-.divider {
-  border-width: 2px;
-}
-.card-title-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.paragraph {
-  max-width: 1000px;
-}
-
-/* Text */
-.f-dancing {
-  font-family: 'Dancing Script', cursive;
-}
-.f-martel {
-  font-family: 'Martel', serif;
-}
-.f-roboto-slab {
-  font-family: 'Roboto Slab', serif;
-}
-.stroke {
-  -webkit-text-stroke: 2px white;
-}
-.h1-size {
-  font-size: 1.5rem;
-}
-.h4-size {
-  font-size: 4rem;
-}
-.h5-size {
-  font-size: 5rem;
-}
-.h6-size {
-  font-size: 8rem;
-}
-
-/* Fade Animation */
-.fade-in {
-animation: fadeIn ease 2s;
--webkit-animation: fadeIn ease 2s;
--moz-animation: fadeIn ease 2s;
--o-animation: fadeIn ease 2s;
--ms-animation: fadeIn ease 2s;
-}
-.slow-fade-in {
-animation: fadeIn ease 5s;
--webkit-animation: fadeIn ease 5s;
--moz-animation: fadeIn ease 5s;
--o-animation: fadeIn ease 5s;
--ms-animation: fadeIn ease 5s;
-}
-@keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-moz-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-webkit-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-o-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-ms-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
+.v-btn:before {
+    background-color: unset !important;
 }
 </style>
