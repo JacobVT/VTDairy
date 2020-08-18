@@ -93,6 +93,9 @@ export default {
 .paragraph {
   max-width: 1000px;
 }
+.screen-height {
+  height: 87vh;
+}
 
 /* Text */
 .f-dancing {
@@ -104,8 +107,8 @@ export default {
 .f-roboto-slab {
   font-family: 'Roboto Slab', serif;
 }
-.stroke {
-  -webkit-text-stroke: 2px white;
+.primary--text {
+  color: #a43229;
 }
 .h1-size {
   font-size: 1.5rem;

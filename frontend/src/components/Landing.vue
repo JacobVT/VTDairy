@@ -1,10 +1,10 @@
 <template v-on:scroll="handleScroll">
-	<v-container>
+	<v-container class="fade-in">
 		<!-- Title -->
-		<v-row justify="center" align="center" class="pb-5" style="height: 85vh">
+		<v-row justify="center" align="center" class="pb-5 screen-height">
 			<v-col class="text-center" cols="12">
 				<h5 class="f-dancing h5-size"> Welcome to the</h5>
-				<h6 class="f-martel h6-size stroke dairy-title"> Van Tol Dairy </h6>
+				<h6 class="f-martel h6-size dairy-title"> Van Tol Dairy </h6>
 			</v-col>
 		</v-row>
 		<div v-if="!scrolledOnce" style="height: 100vh"></div>
