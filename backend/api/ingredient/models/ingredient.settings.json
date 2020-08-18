@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ingredients",
+  "info": {
+    "name": "Ingredient"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "unit": {
+      "type": "string",
+      "required": false
+    },
+    "amount": {
+      "type": "float",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "recipe": {
+      "model": "recipe",
+      "via": "ingredients"
+    }
+  }
+}

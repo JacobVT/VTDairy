@@ -1,0 +1,54 @@
+{
+  "kind": "collectionType",
+  "collectionName": "recipes",
+  "info": {
+    "name": "Recipe"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "breakfast",
+        "dessert",
+        "side",
+        "drink",
+        "main",
+        "salad",
+        "appetizer"
+      ],
+      "required": true
+    },
+    "picture": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "steps": {
+      "via": "recipe",
+      "collection": "step"
+    },
+    "ingredients": {
+      "via": "recipe",
+      "collection": "ingredient"
+    }
+  }
+}
