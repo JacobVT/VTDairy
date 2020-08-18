@@ -4,12 +4,13 @@
 		<v-row justify="center" align="center" class="pb-5" style="height: 85vh">
 			<v-col class="text-center" cols="12">
 				<h5 class="f-dancing h5-size"> Welcome to the</h5>
-				<h6 class="f-martel h6-size stroke" style=" color: skyblue"> Van Tol Dairy </h6>
+				<h6 class="f-martel h6-size stroke dairy-title"> Van Tol Dairy </h6>
 			</v-col>
 		</v-row>
+		<div v-if="!scrolledOnce" style="height: 100vh"></div>
 
 		<!-- Transition -->
-		<div style="height: 35vh">
+		<div>
 			<v-row justify="center" align="end">
 				<v-expand-x-transition>
 					<v-divider v-if="scrolledOnce" class="divider"></v-divider>
@@ -31,17 +32,19 @@
 		</div>
 
 		<!-- Slide -->
-		<v-row justify="center" align="start" v-observe-visibility="visibilityChanged">
-			<v-slide-group v-if="cardVisible" v-model="currentSlide" class="fade-in">
+		<v-row v-if="scrolledOnce" class="fade-in" justify="center" align="start">
+			<v-slide-group v-model="currentSlide" class="fade-in">
 				<v-slide-item v-for="(slide, i) in slides" :key="i" v-slot:default="{ active, toggle }">
 					<v-card class="ma-5" height="400" width="300" @mouseenter="toggle" @mouseleave="toggle">
-						<v-img class="white--text align-start" height="400px" :src="require('../assets/' + slide.image)">
-							<v-card-title class="card-title-overlay f-martel">{{slide.title}}</v-card-title>
-							<v-expand-transition>
-								<v-card-text v-if="active" class="card-title-overlay" style="height: 400px">
-									{{slide.text}}</v-card-text>
-							</v-expand-transition>
-						</v-img>
+						<a>
+							<v-img class="white--text align-start" height="400px" :src="require('../assets/' + slide.image)" @click="$router.push(slide.link)">
+								<v-card-title class="card-title-overlay f-martel">{{slide.title}}</v-card-title>
+								<v-expand-transition>
+									<v-card-text v-if="active" class="card-title-overlay" style="height: 400px">
+										{{slide.text}}</v-card-text>
+								</v-expand-transition>
+							</v-img>
+						</a>
 					</v-card>
 				</v-slide-item>
 			</v-slide-group>
@@ -68,16 +71,19 @@
 					title: "Read Our Story",
 					text: "Discover the origins of the Van Tol Dairy. Learn about who we are and why we love what we do.",
 					image: "owners.jpg",
+					link: "/story",
 				},
 				{
 					title: "Explore Recipes",
 					text: "Coming Soon",
 					image: "swing.jpg",
+					link: "/",
 				},
 				{
 					title: "Play Games",
 					text: "Coming Soon",
 					image: "jump.jpg",
+					link: "/"
 				},
 			],
 
@@ -85,6 +91,7 @@
 
 		created() {
 			window.addEventListener('scroll', this.handleScroll);
+			window.scrollTo(0,0);
 		},
 
 		methods: {
@@ -102,80 +109,3 @@
 		},
 	};
 </script>
-<style scoped>
-.divider {
-  border-width: 2px;
-}
-.card-title-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-.paragraph {
-  max-width: 1000px;
-}
-
-/* Text */
-.f-dancing {
-  font-family: 'Dancing Script', cursive;
-}
-.f-martel {
-  font-family: 'Martel', serif;
-}
-.f-roboto-slab {
-  font-family: 'Roboto Slab', serif;
-}
-.stroke {
-  -webkit-text-stroke: 2px white;
-}
-.h1-size {
-  font-size: 1.5rem;
-}
-.h4-size {
-  font-size: 4rem;
-}
-.h5-size {
-  font-size: 5rem;
-}
-.h6-size {
-  font-size: 8rem;
-}
-
-/* Fade Animation */
-.fade-in {
-animation: fadeIn ease 2s;
--webkit-animation: fadeIn ease 2s;
--moz-animation: fadeIn ease 2s;
--o-animation: fadeIn ease 2s;
--ms-animation: fadeIn ease 2s;
-}
-.slow-fade-in {
-animation: fadeIn ease 5s;
--webkit-animation: fadeIn ease 5s;
--moz-animation: fadeIn ease 5s;
--o-animation: fadeIn ease 5s;
--ms-animation: fadeIn ease 5s;
-}
-@keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-moz-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-webkit-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-o-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-
-@-ms-keyframes fadeIn {
-0% {opacity:0;}
-100% {opacity:1;}
-}
-</style>

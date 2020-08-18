@@ -74,14 +74,89 @@ export default {
   }),
 };
 </script>
-<style scoped>
+<style>
 #dairy {
   background: rgb(255, 254, 241)
 }
-html {
-  scroll-behavior: smooth;
+.dairy-title {
+  color: skyblue;
 }
 .v-btn:before {
     background-color: unset !important;
+}
+.divider {
+  border-width: 2px;
+}
+.card-title-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.paragraph {
+  max-width: 1000px;
+}
+
+/* Text */
+.f-dancing {
+  font-family: 'Dancing Script', cursive;
+}
+.f-martel {
+  font-family: 'Martel', serif;
+}
+.f-roboto-slab {
+  font-family: 'Roboto Slab', serif;
+}
+.stroke {
+  -webkit-text-stroke: 2px white;
+}
+.h1-size {
+  font-size: 1.5rem;
+}
+.h4-size {
+  font-size: 4rem;
+}
+.h5-size {
+  font-size: 5rem;
+}
+.h6-size {
+  font-size: 8rem;
+}
+
+/* Fade Animation */
+.fade-in {
+animation: fadeIn ease 2s;
+-webkit-animation: fadeIn ease 2s;
+-moz-animation: fadeIn ease 2s;
+-o-animation: fadeIn ease 2s;
+-ms-animation: fadeIn ease 2s;
+}
+.slow-fade-in {
+animation: fadeIn ease 5s;
+-webkit-animation: fadeIn ease 5s;
+-moz-animation: fadeIn ease 5s;
+-o-animation: fadeIn ease 5s;
+-ms-animation: fadeIn ease 5s;
+}
+@keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-moz-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-webkit-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-o-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
+}
+
+@-ms-keyframes fadeIn {
+0% {opacity:0;}
+100% {opacity:1;}
 }
 </style>
