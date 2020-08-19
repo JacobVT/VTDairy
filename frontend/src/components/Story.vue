@@ -35,7 +35,7 @@
 					<v-col cols="6" class="card-title-overlay pa-5" dark>
 						<span class="f-dancing h5-size"> Teaming Up With Nature </span> <br/>
 						<span class="f-roboto-slab h1-size">
-							Van Tol Dairy was <span class="text-decoration-underline">certified organic</span> in 2005 and we became a part of Organic Valley Coop. Gerrit’s observation is, “The cows are healthy if they eat healthy grass. If you don’t have healthy grass, you don’t have healthy soil, and you can’t have healthy soil if you poison it year after year with chemicals”.<br/><br/>
+							Van Tol Dairy was <span class="text-decoration-underline">certified organic</span> in 2005 and we became a part of Organic Valley Coop. Gerrit’s observation is, <strong>“The cows are healthy if they eat healthy grass. If you don’t have healthy grass, you don’t have healthy soil, and you can’t have healthy soil if you poison it year after year with chemicals”</strong>.<br/><br/>
 							Our family enjoys nature’s theater each day as we witness a vast array of diversity of life. It’s not uncommon to see owls, hawks, bald eagles, bats, coyotes, herons, ducks and geese. Thankfully we have yet to see a bear or cougar on our property!
 						</span>
 					</v-col>
