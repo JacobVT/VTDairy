@@ -37,7 +37,23 @@
 				<v-slide-item v-for="(slide, i) in slides" :key="i" v-slot:default="{ active, toggle }">
 					<v-card class="ma-5" height="400" width="300" @mouseenter="toggle" @mouseleave="toggle">
 						<a>
-							<v-img class="white--text align-start" height="400px" :src="require('../assets/' + slide.image)" @click="$router.push(slide.link)">
+							<v-img
+								class="white--text align-start" 
+								height="400px" 
+								:src="require('../assets/' + slide.image)" 
+								:lazy-src="require('../assets/ph_' + slide.image)"
+								@click="$router.push(slide.link)"
+							>
+								<template v-slot:placeholder>
+									<v-row
+									class="fill-height ma-0"
+									align="center"
+									justify="center"
+									>
+									<v-progress-circular indeterminate color="primary" size="64"></v-progress-circular>
+									</v-row>
+								</template>
+
 								<v-card-title class="card-title-overlay f-martel">{{slide.title}}</v-card-title>
 								<v-expand-transition>
 									<v-card-text v-if="active" class="card-title-overlay" style="height: 400px">
