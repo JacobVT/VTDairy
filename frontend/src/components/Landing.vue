@@ -22,7 +22,7 @@
 				</h5>
 			</v-row>
 			<v-row justify="center" class="mt-5 ml-5 mr-5">
-				<div v-if="scrolledOnce" class="slow-fade-in text-xs-left dairy-paragraph">
+				<div v-if="scrolledOnce" class="slow-fade-in text-xs-left dairy-paragraph" style="max-width: 1020px;">
 					Glad you asked!
 					On this site, you can learn the answer to this question and much more. We are dedicated to sharing
 					knowledge and enjoyment with everyone who visits. <br /><br />
