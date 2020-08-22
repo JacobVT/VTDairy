@@ -8,7 +8,7 @@
       <v-btn icon class="btn-fix" dark to="/" active-class>
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <v-toolbar-title class="f-martel white--text">Van Tol Dairy</v-toolbar-title>
+      <v-toolbar-title class="dairy-title hidden-sm-and-down white--text">Van Tol Dairy</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -23,21 +23,25 @@
           <template v-slot:activator="{ on, attrs }">
             <v-btn 
               color="white"
-              text
+              :text="$vuetify.breakpoint.mdAndUp"
+              :icon="$vuetify.breakpoint.smAndDown"
               v-bind="attrs"
               v-on="on"
               :to="item.link"
-            > {{item.title}}
+            > <span v-if="$vuetify.breakpoint.mdAndUp"> {{item.title}} </span>
+            <v-icon v-else> {{item.icon}} </v-icon> 
             </v-btn>
           </template>
           <span>Still in development!</span>
         </v-tooltip>
         <v-btn 
           color="white"
-          text
+          :text="$vuetify.breakpoint.mdAndUp"
+          :icon="$vuetify.breakpoint.smAndDown"
           v-else
           :to="item.link"
-        > {{item.title}}
+        > <span v-if="$vuetify.breakpoint.mdAndUp"> {{item.title}} </span>
+        <v-icon v-else> {{item.icon}} </v-icon> 
         </v-btn>
       </div>
     </v-app-bar>
@@ -58,22 +62,29 @@ export default {
       {
         title: 'Story',
         link: '/story',
+        icon: 'mdi-book-open-variant',
         inDev: false,
       },
       {
         title: 'Recipes',
         link: '/',
+        icon: 'mdi-silverware',
         inDev: true,
       },
       {
         title: 'Games',
         link: '/',
+        icon: 'mdi-google-controller',
         inDev: true,
       },
     ],
   }),
 };
 </script>
+<style lang="scss">
+  @import './styles/custom_fonts.scss';
+</style>
+
 <style>
 #dairy {
   background: rgb(255, 254, 241)
@@ -98,15 +109,6 @@ export default {
 }
 
 /* Text */
-.f-dancing {
-  font-family: 'Dancing Script', cursive;
-}
-.f-martel {
-  font-family: 'Martel', serif;
-}
-.f-roboto-slab {
-  font-family: 'Roboto Slab', serif;
-}
 .primary--text {
   color: #a43229;
 }
@@ -118,9 +120,6 @@ export default {
 }
 .h5-size {
   font-size: 5rem;
-}
-.h6-size {
-  font-size: 8rem;
 }
 
 /* Fade Animation */
