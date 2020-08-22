@@ -1,0 +1,217 @@
+@use 'sass:map';
+
+/// Imports
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
+
+@import url("https://fonts.googleapis.com/css2?family=Martel:wght@600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300&display=swap");
+
+/// Maps
+$breakpoints: (
+	xs: 600px,
+	sm: 960px,
+	md: 1264px,
+	lg: 1904px
+) !default;
+
+$sizes: (
+	title: 8rem,
+	h1: 6rem,
+	h2: 3.75rem,
+	h3: 3rem,
+	h4: 2.125rem,
+	h5: 1.5rem,
+	h6: 1.25rem,
+	subtitle: 1rem,
+) !default;
+
+/// Default CSS
+@each $name, $size in $sizes {
+	.size-#{$name} {
+		font-size: $size !important;
+	}
+}
+
+.dairy-title {
+	font-family: 'Martel', serif;
+	font-size: map-get($sizes, 'title');
+}
+.dairy-script {
+	font-family: 'Dancing Script', cursive;
+	font-size: map-get($sizes, 'h1');
+}
+.dairy-paragraph {
+	font-family: 'Roboto Slab', serif;
+	font-size: map-get($sizes, 'h5');
+}
+.dairy-important {
+	font-family: 'Roboto Slab', serif;
+	font-size: map-get($sizes, 'h2');
+}
+
+/// Mixins and Functions
+@mixin media($conditions...) {
+	@for $i from 1 through length($conditions) {
+		$conditions: set-nth($conditions, $i, parse-expression(nth($conditions, $i)));
+	}
+
+	$branches: get-query-branches($conditions);
+	$query: '';
+
+	@each $branch in $branches {
+		@if (str-length($query) !=0) {
+			$query: $query + ', ';
+		}
+
+		$query: $query+$branch;
+	}
+
+	@media #{$query} {
+		@content;
+	}
+}
+
+@function get-query-branches($expressions) {
+	$result: '';
+	$has-groups: false;
+
+	// Getting initial snapshot and looking for groups
+	@each $expression in $expressions {
+		@if (str-length($result) !=0) {
+			$result: $result + ' and ';
+		}
+
+		@if (type-of($expression)=='string') {
+			$result: $result + $expression;
+		}
+
+		@else if (type-of($expression)=='list') {
+			$result: $result + nth($expression, 1);
+			$has-groups: true;
+		}
+
+		@else {
+			@warn '#{$expression} is not a valid expression.';
+		}
+	}
+
+	// If we have groups, we have to create all possible combinations
+	@if $has-groups {
+		@each $expression in $expressions {
+			@if (type-of($expression)=='list') {
+				$first: nth($expression, 1);
+
+				@each $member in $expression {
+					@if ($member !=$first) {
+						@each $partial in $result {
+							$result: join($result, str-replace-first($first, $member, $partial));
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@return $result;
+}
+
+@function parse-expression($expression) {
+	$operator: '';
+	$value: '';
+	$element: '';
+	$result: '';
+	$is-width: true;
+
+	@if (type-of($expression) !='string') {
+		@warn 'Expression with type `#{type-of($expression)}` detected, string expected.';
+	}
+
+	// Separating the operator from the rest of the expression
+	@if (str-slice($expression, 2, 2)=='=') {
+		$operator: str-slice($expression, 1, 2);
+		$value: str-slice($expression, 3);
+	}
+
+	@else {
+		$operator: str-slice($expression, 1, 1);
+		$value: str-slice($expression, 2);
+	}
+
+	// Checking what type of expression we're dealing with
+	@if map-has-key($breakpoints, $value) {
+		$result: map-get($breakpoints, $value);
+	}
+
+	@else if map-has-key($media-expressions, $expression) {
+		$result: map-get($media-expressions, $expression);
+		$is-width: false;
+	}
+
+	@else {
+		$result: to-number($value);
+	}
+
+	@if ($is-width) {
+		$unit: 'px';
+		$interval: 0;
+
+		@if ($operator=='>') {
+			$element: '(min-width: #{$result + $interval})';
+		}
+
+		@else if ($operator=='<') {
+			$element: '(max-width: #{$result - $interval})';
+		}
+
+		@else if ($operator=='>=') {
+			$element: '(min-width: #{$result})';
+		}
+
+		@else if ($operator=='<=') {
+			$element: '(max-width: #{$result})';
+		}
+
+		@else {
+			@warn '#{$expression} is missing an operator.';
+		}
+	}
+
+	@else {
+		$element: $result;
+	}
+
+	@return $element;
+}
+
+/// View-dependent css
+@include media("<sm") {
+	.dairy-title {
+		font-size: map-get($sizes, 'h1');
+	}
+	.dairy-script {
+		font-size: map-get($sizes, 'h2');
+	}
+	.dairy-paragraph {
+		font-size: map-get($sizes, 'h6');
+	}
+	.dairy-important {
+		font-size: map-get($sizes, 'h4');
+	}
+}
+@include media("<xs") {
+	.dairy-title {
+		font-size: map-get($sizes, 'h2');
+	}
+	.dairy-script {
+		font-size: map-get($sizes, 'h3');;
+	}
+	.dairy-paragraph {
+		font-size: map-get($sizes, 'subtitle');
+	}
+	.dairy-important {
+		font-size: map-get($sizes, 'h5');
+	}
+}

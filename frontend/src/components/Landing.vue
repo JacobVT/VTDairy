@@ -3,8 +3,8 @@
 		<!-- Title -->
 		<v-row justify="center" align="center" class="pb-5 screen-height">
 			<v-col class="text-center" cols="12">
-				<h5 class="f-dancing h5-size"> Welcome to the</h5>
-				<h6 class="f-martel h6-size dairy-title"> Van Tol Dairy </h6>
+				<h5 class="dairy-script"> Welcome to the</h5>
+				<h6 class="dairy-title"> Van Tol Dairy </h6>
 			</v-col>
 		</v-row>
 		<div v-if="!scrolledOnce" style="height: 100vh"></div>
@@ -13,21 +13,21 @@
 		<div>
 			<v-row justify="center" align="end">
 				<v-expand-x-transition>
-					<v-divider v-if="scrolledOnce" class="divider"></v-divider>
+					<v-divider v-if="scrolledOnce && $vuetify.breakpoint.mdAndUp" class="divider"></v-divider>
 				</v-expand-x-transition>
 			</v-row>
 			<v-row justify="center" class="mt-5 mb-5">
-				<h5 v-if="scrolledOnce" class="fade-in f-dancing h4-size">
+				<h5 v-if="scrolledOnce" class="fade-in dairy-script">
 					Who are we?
 				</h5>
 			</v-row>
-			<v-row justify="center" class="mt-5 ml-5">
-				<h1 v-if="scrolledOnce" class="slow-fade-in f-roboto-slab h1-size text-xs-left paragraph">
+			<v-row justify="center" class="mt-5 ml-5 mr-5">
+				<div v-if="scrolledOnce" class="slow-fade-in text-xs-left dairy-paragraph">
 					Glad you asked!
 					On this site, you can learn the answer to this question and much more. We are dedicated to sharing
 					knowledge and enjoyment with everyone who visits. <br /><br />
-					<strong> To continue, just click one of the options below! </strong>
-				</h1>
+					To continue, just <span class="text-decoration-underline">click an option below</span>!
+				</div>
 			</v-row>
 		</div>
 
@@ -54,7 +54,7 @@
 									</v-row>
 								</template>
 
-								<v-card-title class="card-title-overlay f-martel">{{slide.title}}</v-card-title>
+								<v-card-title class="card-title-overlay dairy-title white--text">{{slide.title}}</v-card-title>
 								<v-expand-transition>
 									<v-card-text v-if="active" class="card-title-overlay" style="height: 400px">
 										{{slide.text}}</v-card-text>
@@ -66,7 +66,7 @@
 			</v-slide-group>
 		</v-row>
 		<v-fab-transition>
-			<v-btn v-if="!scrolled" fab class="thing" color="rgba(0, 0, 0, 0.5)" fixed large dark bottom right readonly>
+			<v-btn v-if="!scrolled" fab class="thing" color="rgba(0, 0, 0, 0.5)" fixed :large="$vuetify.breakpoint.mdAndUp" dark bottom right readonly>
 				<v-icon>mdi-chevron-double-down</v-icon>
 			</v-btn>
 		</v-fab-transition>
