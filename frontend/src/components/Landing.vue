@@ -110,7 +110,11 @@
                   </v-row>
                 </template>
 
-                <v-card-title class="card-title-overlay dairy-title white--text">{{ slide.title }}</v-card-title>
+                <v-card-title
+                  :class="`card-title-overlay dairy-title white--text ${$vuetify.breakpoint.smAndDown ? 'size-h6' : 'size-h5'}`"
+                >
+                  {{ slide.title }}
+                </v-card-title>
                 <v-expand-transition>
                   <v-card-text
                     v-if="active"
