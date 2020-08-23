@@ -15,15 +15,12 @@
     "core-js": "^3.6.5",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
-    "material-design-icons-iconfont": "^5.0.1",
-    "sass": "^1.19.0",
-    "sass-loader": "^8.0.0",
     "vue": "^2.6.11",
     "vue-apollo": "^3.0.4",
     "vue-observe-visibility": "^0.4.6",
     "vue-router": "^3.3.4",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "vuetify-loader": "^1.6.0"
   },
   "devDependencies": {
     "@mdi/font": "^5.5.55",
