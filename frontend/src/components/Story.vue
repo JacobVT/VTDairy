@@ -23,7 +23,7 @@
             <v-img
               src="../assets/brothers.jpg"
               lazy-src="../assets/ph_brothers.jpg"
-              style="max-width: 100%; max-height: 100%"
+              aspect-ratio="1.5"
             >
               <template v-slot:placeholder>
                 <v-row
@@ -34,7 +34,7 @@
                   <v-progress-circular
                     indeterminate
                     color="primary"
-                    size="96"
+                    :size="$vuetify.breakpoint.smAndDown ? 32 : 96"
                     width="8"
                   ></v-progress-circular>
                 </v-row>
@@ -87,7 +87,7 @@
             <v-img
               src="../assets/brownie.jpg"
               lazy-src="../assets/ph_brownie.jpg"
-              style="max-width: 100%; max-height: 100%"
+              aspect-ratio="1.5"
             >
               <template v-slot:placeholder>
                 <v-row
@@ -98,7 +98,7 @@
                   <v-progress-circular
                     indeterminate
                     color="primary"
-                    size="96"
+                    :size="$vuetify.breakpoint.smAndDown ? 32 : 96"
                     width="8"
                   ></v-progress-circular>
                 </v-row>
@@ -152,7 +152,10 @@
           <span class="dairy-important">
             Family is of the utmost importance.<br />
             The dairy would not be what it is today without the strong bond we share and the capable hands involved.
-          </span> <span class="dairy-script size-h5"> (The End. Thanks for reading!) </span>
+          </span><br />
+          <span :class="$vuetify.breakpoint.mdAndUp ? 'dairy-script size-h5' : 'dairy-script size-h6'">
+            (The End. Thanks for reading!)
+          </span>
         </v-col>
       </v-row>
     </v-container>
