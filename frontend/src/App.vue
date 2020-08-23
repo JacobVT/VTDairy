@@ -5,43 +5,57 @@
       color="primary"
       elevate-on-scroll
     >
-      <v-btn icon class="btn-fix" dark to="/" active-class>
+      <v-btn
+        icon
+        class="btn-fix"
+        dark
+        to="/"
+        active-class
+      >
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <v-toolbar-title class="dairy-title hidden-sm-and-down white--text">Van Tol Dairy</v-toolbar-title>
+      <v-toolbar-title class="dairy-title hidden-sm-and-down white--text">
+        Van Tol Dairy
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <div 
-        v-for="item in appBarLinks" 
-        :key="item.title" 
+      <div
+        v-for="item in appBarLinks"
+        :key="item.title"
       >
-        <v-tooltip 
-          bottom
+        <v-tooltip
           v-if="item.inDev"
+          bottom
         >
           <template v-slot:activator="{ on, attrs }">
-            <v-btn 
+            <v-btn
               color="white"
               :text="$vuetify.breakpoint.mdAndUp"
               :icon="$vuetify.breakpoint.smAndDown"
               v-bind="attrs"
-              v-on="on"
               :to="item.link"
-            > <span v-if="$vuetify.breakpoint.mdAndUp"> {{item.title}} </span>
-            <v-icon v-else> {{item.icon}} </v-icon> 
+              v-on="on"
+            >
+              <span v-if="$vuetify.breakpoint.mdAndUp"> {{ item.title }} </span>
+              <v-icon v-else>
+                {{ item.icon }}
+              </v-icon>
             </v-btn>
           </template>
           <span>Still in development!</span>
         </v-tooltip>
-        <v-btn 
+        <v-btn
+          v-else
           color="white"
           :text="$vuetify.breakpoint.mdAndUp"
           :icon="$vuetify.breakpoint.smAndDown"
-          v-else
           :to="item.link"
-        > <span v-if="$vuetify.breakpoint.mdAndUp"> {{item.title}} </span>
-        <v-icon v-else> {{item.icon}} </v-icon> 
+        >
+          <span v-if="$vuetify.breakpoint.mdAndUp"> {{ item.title }} </span>
+          <v-icon v-else>
+            {{ item.icon }}
+          </v-icon>
         </v-btn>
       </div>
     </v-app-bar>
@@ -57,28 +71,30 @@
 export default {
   name: 'App',
 
-  data: () => ({
-    appBarLinks: [
-      {
-        title: 'Story',
-        link: '/story',
-        icon: 'mdi-book-open-variant',
-        inDev: false,
-      },
-      {
-        title: 'Recipes',
-        link: '/',
-        icon: 'mdi-silverware',
-        inDev: true,
-      },
-      {
-        title: 'Games',
-        link: '/',
-        icon: 'mdi-google-controller',
-        inDev: true,
-      },
-    ],
-  }),
+  data: () => {
+    return {
+      appBarLinks: [
+        {
+          title: 'Story',
+          link: '/story',
+          icon: 'mdi-book-open-variant',
+          inDev: false,
+        },
+        {
+          title: 'Recipes',
+          link: '/',
+          icon: 'mdi-silverware',
+          inDev: true,
+        },
+        {
+          title: 'Games',
+          link: '/',
+          icon: 'mdi-google-controller',
+          inDev: true,
+        },
+      ],
+    };
+  },
 };
 </script>
 <style lang="scss">
