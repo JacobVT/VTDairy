@@ -46,15 +46,15 @@
 							>
 								<template v-slot:placeholder>
 									<v-row
-									class="fill-height ma-0"
-									align="center"
-									justify="center"
+										class="fill-height ma-0"
+										align="center"
+										justify="center"
 									>
 									<v-progress-circular indeterminate color="primary" size="64"></v-progress-circular>
 									</v-row>
 								</template>
 
-								<v-card-title class="card-title-overlay dairy-title white--text">{{slide.title}}</v-card-title>
+								<v-card-title class="card-title-overlay dairy-title size-h6 white--text">{{slide.title}}</v-card-title>
 								<v-expand-transition>
 									<v-card-text v-if="active" class="card-title-overlay" style="height: 400px">
 										{{slide.text}}</v-card-text>
@@ -66,7 +66,7 @@
 			</v-slide-group>
 		</v-row>
 		<v-fab-transition>
-			<v-btn v-if="!scrolled" fab class="thing" color="rgba(0, 0, 0, 0.5)" fixed :large="$vuetify.breakpoint.mdAndUp" dark bottom right readonly>
+			<v-btn v-if="!scrolled" fab color="rgba(0, 0, 0, 0.5)" fixed :large="$vuetify.breakpoint.mdAndUp" dark bottom right readonly>
 				<v-icon>mdi-chevron-double-down</v-icon>
 			</v-btn>
 		</v-fab-transition>

@@ -8,7 +8,7 @@
       <v-btn icon class="btn-fix" dark to="/" active-class>
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <v-toolbar-title class="dairy-title hidden-sm-and-down white--text">Van Tol Dairy</v-toolbar-title>
+      <v-toolbar-title class="dairy-title size-h6 hidden-sm-and-down white--text">Van Tol Dairy</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -111,15 +111,6 @@ export default {
 /* Text */
 .primary--text {
   color: #a43229;
-}
-.h1-size {
-  font-size: 1.5rem;
-}
-.h4-size {
-  font-size: 4rem;
-}
-.h5-size {
-  font-size: 5rem;
 }
 
 /* Fade Animation */
