@@ -19,7 +19,8 @@
     "vue-apollo": "^3.0.4",
     "vue-observe-visibility": "^0.4.6",
     "vue-router": "^3.3.4",
-    "vuetify": "^2.2.11"
+    "vuetify": "^2.2.11",
+    "vuetify-loader": "^1.6.0"
   },
   "devDependencies": {
     "@mdi/font": "^5.5.55",
