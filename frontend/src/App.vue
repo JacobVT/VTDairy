@@ -14,7 +14,7 @@
       >
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <v-toolbar-title class="dairy-title hidden-sm-and-down white--text">
+      <v-toolbar-title class="dairy-title size-h5 hidden-sm-and-down white--text">
         Van Tol Dairy
       </v-toolbar-title>
 
