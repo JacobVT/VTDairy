@@ -128,15 +128,6 @@ export default {
 .primary--text {
   color: #a43229;
 }
-.h1-size {
-  font-size: 1.5rem;
-}
-.h4-size {
-  font-size: 4rem;
-}
-.h5-size {
-  font-size: 5rem;
-}
 
 /* Fade Animation */
 .fade-in {
