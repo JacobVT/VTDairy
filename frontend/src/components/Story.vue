@@ -25,7 +25,7 @@
               lazy-src="../assets/ph_brothers.jpg"
               aspect-ratio="1.5"
             >
-              <template v-slot:placeholder>
+              <template #placeholder>
                 <v-row
                   class="fill-height ma-0"
                   align="center"
@@ -89,7 +89,7 @@
               lazy-src="../assets/ph_brownie.jpg"
               aspect-ratio="1.5"
             >
-              <template v-slot:placeholder>
+              <template #placeholder>
                 <v-row
                   class="fill-height ma-0"
                   align="center"

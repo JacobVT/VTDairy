@@ -28,7 +28,7 @@
           v-if="item.inDev"
           bottom
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template #activator="{ on, attrs }">
             <v-btn
               color="white"
               :text="$vuetify.breakpoint.mdAndUp"
