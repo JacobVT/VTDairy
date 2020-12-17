@@ -79,7 +79,7 @@
         <v-slide-item
           v-for="(slide, i) in slides"
           :key="i"
-          v-slot:default="{ active, toggle }"
+          v-slot="{ active, toggle }"
         >
           <v-card
             class="ma-5"
@@ -96,7 +96,7 @@
                 :lazy-src="require('../assets/ph_' + slide.image)"
                 @click="$router.push(slide.link)"
               >
-                <template v-slot:placeholder>
+                <template #placeholder>
                   <v-row
                     class="fill-height ma-0"
                     align="center"
@@ -129,22 +129,6 @@
         </v-slide-item>
       </v-slide-group>
     </v-row>
-    <v-fab-transition>
-      <v-btn
-        v-if="!scrolled"
-        fab
-        class="thing"
-        color="rgba(0, 0, 0, 0.5)"
-        fixed
-        :large="$vuetify.breakpoint.mdAndUp"
-        dark
-        bottom
-        right
-        readonly
-      >
-        <v-icon>mdi-chevron-double-down</v-icon>
-      </v-btn>
-    </v-fab-transition>
   </v-container>
 </template>
 

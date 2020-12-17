@@ -3,62 +3,149 @@
     <v-app-bar
       app
       color="primary"
-      elevate-on-scroll
+      :prominent="$vuetify.breakpoint.lgAndUp"
+      :dense="$vuetify.breakpoint.lgAndUp"
     >
       <v-btn
-        icon
-        class="btn-fix"
-        dark
+        :text="$vuetify.breakpoint.lgAndUp"
+        :icon="$vuetify.breakpoint.mdAndDown"
         to="/"
-        active-class
+        dark
+        class="ml-0 pl-0 mr-0 pr-0"
+        :style="$vuetify.breakpoint.mdAndDown ? '' : 'width: 108px; height: 100%;'"
       >
-        <v-icon>mdi-home</v-icon>
+        <v-icon v-if="$vuetify.breakpoint.mdAndDown">
+          mdi-barn
+        </v-icon>
+        <v-col
+          v-else
+          cols="12"
+        >
+          <v-row
+            width="100%"
+            style="place-content: center; margin-bottom: 8px;"
+          >
+            <v-icon
+              large
+            >
+              mdi-barn
+            </v-icon>
+          </v-row>
+          <v-row
+            width="100%"
+            style="place-content: center"
+          >
+            <span
+              class="body-1"
+              style="font-weight: bold;"
+            >
+              Home
+            </span>
+          </v-row>
+        </v-col>
       </v-btn>
-      <v-toolbar-title class="dairy-title hidden-sm-and-down white--text">
-        Van Tol Dairy
-      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <div
-        v-for="item in appBarLinks"
-        :key="item.title"
-      >
+      <v-toolbar-items v-if="$vuetify.breakpoint.lgAndUp">
         <v-tooltip
-          v-if="item.inDev"
+          v-for="section in sections"
+          :key="section.id"
           bottom
+          :disabled="!section.inDev"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template #activator="{ on, attrs }">
             <v-btn
-              color="white"
-              :text="$vuetify.breakpoint.mdAndUp"
-              :icon="$vuetify.breakpoint.smAndDown"
               v-bind="attrs"
-              :to="item.link"
+              :to="section.inDev ? '' : section.id"
+              text
+              dark
+              style="width: 128px; height: 100%;"
               v-on="on"
             >
-              <span v-if="$vuetify.breakpoint.mdAndUp"> {{ item.title }} </span>
-              <v-icon v-else>
-                {{ item.icon }}
-              </v-icon>
+              <v-col
+                cols="12"
+              >
+                <v-row
+                  width="100%"
+                  style="place-content: center; margin-bottom: 8px;"
+                >
+                  <v-icon
+                    large
+                  >
+                    {{ section.icon }}
+                  </v-icon>
+                </v-row>
+                <v-row
+                  width="100%"
+                  style="place-content: center"
+                >
+                  <span
+                    class="body-1"
+                    style="font-weight: bold;"
+                  >
+                    {{ section.name }}
+                  </span>
+                </v-row>
+              </v-col>
             </v-btn>
           </template>
-          <span>Still in development!</span>
+          <span>In Development</span>
         </v-tooltip>
-        <v-btn
-          v-else
-          color="white"
-          :text="$vuetify.breakpoint.mdAndUp"
-          :icon="$vuetify.breakpoint.smAndDown"
-          :to="item.link"
-        >
-          <span v-if="$vuetify.breakpoint.mdAndUp"> {{ item.title }} </span>
-          <v-icon v-else>
-            {{ item.icon }}
-          </v-icon>
-        </v-btn>
-      </div>
+      </v-toolbar-items>
+
+      <v-app-bar-nav-icon
+        v-else
+        dark
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
     </v-app-bar>
+    <v-navigation-drawer
+      v-if="$vuetify.breakpoint.mdAndDown"
+      v-model="drawer"
+      app
+      right
+      dark
+      width="180"
+      color="primary"
+      overlay-color="primary"
+      style="z-index: 6;"
+    >
+      <v-list-item style="height: 56px">
+        <v-list-item-title class="dairy-title nav-title white--text">
+          Van Tol Dairy
+        </v-list-item-title>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list dense>
+        <v-tooltip
+          v-for="section in sections"
+          :key="section.id"
+          left
+          :disabled="!section.inDev"
+        >
+          <template #activator="{ on, attrs }">
+            <v-list-item
+              v-bind="attrs"
+              :to="section.inDev ? '' : section.id"
+              link
+              v-on="on"
+            >
+              <v-list-item-icon class="mr-2">
+                <v-icon>{{ section.icon }}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>{{ section.name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <span>In Development</span>
+        </v-tooltip>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-main>
       <router-view />
@@ -67,6 +154,8 @@
 </template>
 
 <script>
+
+import { db } from './db';
 
 export default {
   name: 'App',
@@ -93,7 +182,13 @@ export default {
           inDev: true,
         },
       ],
+      drawer: false,
+      sections: [],
     };
+  },
+
+  firestore: {
+    sections: db.collection('sections').orderBy('order', 'asc'),
   },
 };
 </script>
@@ -107,6 +202,9 @@ export default {
 }
 .dairy-title {
   color: skyblue;
+}
+.nav-title {
+  font-size: 18px !important;
 }
 .v-btn:before {
     background-color: unset !important;
