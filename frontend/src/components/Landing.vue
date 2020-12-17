@@ -129,22 +129,6 @@
         </v-slide-item>
       </v-slide-group>
     </v-row>
-    <v-fab-transition>
-      <v-btn
-        v-if="!scrolled"
-        fab
-        class="thing"
-        color="rgba(0, 0, 0, 0.5)"
-        fixed
-        :large="$vuetify.breakpoint.mdAndUp"
-        dark
-        bottom
-        right
-        readonly
-      >
-        <v-icon>mdi-chevron-double-down</v-icon>
-      </v-btn>
-    </v-fab-transition>
   </v-container>
 </template>
 
