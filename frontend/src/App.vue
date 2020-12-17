@@ -48,44 +48,54 @@
       <v-spacer></v-spacer>
 
       <v-toolbar-items v-if="$vuetify.breakpoint.lgAndUp">
-        <v-btn
+        <v-tooltip
           v-for="section in sections"
           :key="section.id"
-          :to="section.id"
-          text
-          dark
-          style="width: 128px; height: 100%;"
+          bottom
+          :disabled="!section.inDev"
         >
-          <v-col
-            cols="12"
-          >
-            <v-row
-              width="100%"
-              style="place-content: center; margin-bottom: 8px;"
+          <template #activator="{ on, attrs }">
+            <v-btn
+              v-bind="attrs"
+              :to="section.inDev ? '' : section.id"
+              text
+              dark
+              style="width: 128px; height: 100%;"
+              v-on="on"
             >
-              <v-icon
-                large
+              <v-col
+                cols="12"
               >
-                {{ section.icon }}
-              </v-icon>
-            </v-row>
-            <v-row
-              width="100%"
-              style="place-content: center"
-            >
-              <span
-                class="body-1"
-                style="font-weight: bold;"
-              >
-                {{ section.name }}
-              </span>
-            </v-row>
-          </v-col>
-        </v-btn>
+                <v-row
+                  width="100%"
+                  style="place-content: center; margin-bottom: 8px;"
+                >
+                  <v-icon
+                    large
+                  >
+                    {{ section.icon }}
+                  </v-icon>
+                </v-row>
+                <v-row
+                  width="100%"
+                  style="place-content: center"
+                >
+                  <span
+                    class="body-1"
+                    style="font-weight: bold;"
+                  >
+                    {{ section.name }}
+                  </span>
+                </v-row>
+              </v-col>
+            </v-btn>
+          </template>
+          <span>In Development</span>
+        </v-tooltip>
       </v-toolbar-items>
 
       <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.mdAndDown"
+        v-else
         dark
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
@@ -110,20 +120,30 @@
       <v-divider></v-divider>
 
       <v-list dense>
-        <v-list-item
+        <v-tooltip
           v-for="section in sections"
-          :key="section.name"
-          :to="section.id"
-          link
+          :key="section.id"
+          left
+          :disabled="!section.inDev"
         >
-          <v-list-item-icon class="mr-2">
-            <v-icon>{{ section.icon }}</v-icon>
-          </v-list-item-icon>
+          <template #activator="{ on, attrs }">
+            <v-list-item
+              v-bind="attrs"
+              :to="section.inDev ? '' : section.id"
+              link
+              v-on="on"
+            >
+              <v-list-item-icon class="mr-2">
+                <v-icon>{{ section.icon }}</v-icon>
+              </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ section.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ section.name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <span>In Development</span>
+        </v-tooltip>
       </v-list>
     </v-navigation-drawer>
 
