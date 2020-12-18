@@ -3,6 +3,7 @@
     <v-app-bar
       app
       color="primary"
+      hide-on-scroll
       :prominent="$vuetify.breakpoint.lgAndUp"
       :dense="$vuetify.breakpoint.lgAndUp"
     >
