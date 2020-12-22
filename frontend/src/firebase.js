@@ -28,4 +28,3 @@ export {
   sectionsCollection,
   usersCollection,
 };
-// eslint-disable-next-line import/prefer-default-export
